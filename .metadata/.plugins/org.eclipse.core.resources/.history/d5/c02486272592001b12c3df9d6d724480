@@ -1,0 +1,100 @@
+package midtest;
+import java.util.*;
+import java.io.*;
+
+abstract class Employee{
+	String ID;
+	String name;
+	float salary;
+	Employee(){
+		this.ID = "";
+		this.name = "";
+		this.salary = 0;
+	}
+	abstract float caculateSalary();
+	void input() {
+		Scanner ad = new Scanner(System.in);
+		ID = ad.nextLine();
+		ad.nextLine();
+		name = ad.nextLine();
+		ad.nextLine();
+	}
+	void output() {
+		System.out.println("ID: "+ID+" | Ten nhan vien: "+name+" | Luong: "+salary);
+	}
+	
+}
+class RegularEmployee extends Employee{
+	float salaryGrading;
+	float benefitGrading;
+	RegularEmployee(){
+		this.salaryGrading = 0;
+		this.benefitGrading = 0;
+	}
+	
+	float caculateSalary() {
+		return (float) (1000000*(1.0*salaryGrading*benefitGrading));
+	}
+	void input() {
+		super.input();
+		Scanner ad = new Scanner(System.in);
+		salaryGrading = ad.nextFloat();
+		benefitGrading = ad.nextFloat();
+	}
+}
+class ContractStaff extends Employee{
+	float wage;
+	float workday;
+	float excessHoursGrading;
+	ContractStaff(){
+		this.wage = 0;
+		this.workday = 0;
+		this.excessHoursGrading = 0;
+	}
+	float caculateSalary() {
+		return (float) wage* workday*(1+ excessHoursGrading);
+	}
+	void input() {
+		super.input();
+		Scanner ad = new Scanner(System.in);
+		wage = ad.nextFloat();
+		workday = ad.nextFloat();
+		excessHoursGrading = ad.nextFloat();
+	}
+}
+class EmployeeList{
+	Employee list[]= new Employee[100];
+	char asd,l;
+	int n=0;
+	void inputEmployee() throws IOException {
+		do {
+			System.out.print("Nhap nhan vien hoac staff (nv/sf): ");
+			asd = (char) System.in.read();
+			if(asd == 'n' || asd == 'N')
+				list[n] = new RegularEmployee();
+			else 
+				list[n] = new ContractStaff();
+			System.in.skip(asd);
+			list[n++].input();
+			System.out.print("Tiep tuc? (y/n)");
+			l = (char) System.in.read();
+			System.in.skip(l);
+			if(l == 'n' || l == 'N' || n == 100)
+				break;
+		}while(true);
+	}
+	void output() {
+		for(int i=0;i<n;i++)
+			list[n].output();
+	}
+}
+
+
+public class index {
+
+	public static void main(String[] args) {
+		
+
+	}
+
+}

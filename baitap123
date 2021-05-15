@@ -1,0 +1,180 @@
+import java.util.*;
+import java.io.*;
+
+abstract class developer{
+	String name;
+	int level;
+	developer() {
+		this.name =" ";
+		this.level = 0;
+	}
+	developer(String name, int level){
+		this.name = name;
+		this.level = level;
+	}
+	abstract float getpayment();
+	void input() {
+		Scanner ad = new Scanner(System.in);
+		System.out.println("Nhap ten:");
+		this.name = ad.nextLine();
+		System.out.println("Nhap level:");
+		this.level = ad.nextInt();
+	}
+	void output() {
+		System.out.println("| Ten: "+this.name+" | Level: "+this.level+" | Luong: "+getpayment());
+	}
+	
+	
+}
+class devpro extends developer{
+	int bonus;
+	float time;
+	devpro(){
+		this.bonus = 0;
+		this.time = 0;
+	}
+	devpro(int bonus, float time){
+		this.bonus = bonus;
+		this.time = time;
+	}
+	float getpayment() {
+		return (float) (bonus+time*2+1000000);
+	}
+	void input() {
+		super.input();
+		Scanner ad = new Scanner(System.in);
+		System.out.print("Nhap Bonus: ");
+		this.bonus = ad.nextInt();
+		System.out.print("Nhap time: ");
+		this.time = ad.nextFloat();
+	}
+	void output() {
+		super.output();
+	}
+	
+}
+class devpm extends developer{
+	int bonus;
+	devpm(){
+		this.bonus=0;
+	}
+	devpm(int bonus){
+		this.bonus = bonus;
+	}
+	float getpayment() {
+		return (bonus*3+3000000);
+	}
+	void input() {
+		super.input();
+		Scanner ad = new Scanner(System.in);
+		System.out.print("Nhap Bonus: ");
+		this.bonus = ad.nextInt();
+	}
+	void output() {
+		super.output();
+	}
+}
+class data{
+	developer list[] = new developer[100];
+	int n=0;
+	char asd,dsa;
+	void input() throws IOException{
+		do {
+			System.out.println("DevPro hay DevPM (1/2): ");
+			asd = (char)System.in.read();
+			if(asd == '1')
+				list[n] = new devpro();
+			else 
+				list[n] = new devpm();
+			
+			System.in.skip(asd);
+			list[n++].input();
+			System.out.println("Tiep tuc? (y/n): ");
+			dsa = (char)System.in.read();
+			System.in.skip(dsa);
+			if(dsa == 'n'|| dsa == 'N')
+				break;
+		}while(true);
+	}
+	void output() {
+		for(int i=0;i<n;i++) {
+			list[i].output();
+		}
+	}
+	void tang() {
+		developer tmp;
+		for(int i=0;i<n-1;i++) {
+			for(int j=i+1;j<n;j++) {
+				if(list[i].getpayment()>list[j].getpayment()) {
+					developer tmp = list[i];
+					list[i] = list[j];
+					list[j] = tmp;
+				}	
+			}
+		}
+		for(int i=0;i<n;i++) {
+			list[i].output();
+		}
+	}
+	void giam() {
+		for(int i=0;i<n-1;i++) {
+			for(int j=i+1;j<n;j++) {
+				if(list[i].getpayment()<list[j].getpayment()) {
+					developer tmp = list[i];
+					list[i] = list[j];
+					list[j] = tmp;
+				}	
+			}
+		}
+		for(int i=0;i<n;i++) {
+			list[i].output();
+		}
+	}
+	void Max() {
+		float Max = list[0].getpayment();
+		for(int i=1;i<n;i++) {
+			if(Max<list[i].getpayment()) {
+				Max = list[i].getpayment();
+			}
+		}
+		for (int i=0;i<n;i++) {
+			if(Max == list[i].getpayment()) {
+				System.out.println("Nguoi co luong cao nhat la:" +Max);
+				list[i].output();
+			}
+		}
+	}
+	void Min() {
+		float Min = list[0].getpayment();
+		for(int i=1;i<n;i++) {
+			if(Min>list[i].getpayment()) {
+				Min = list[i].getpayment();
+			}
+		}
+		for (int i=0;i<n;i++) {
+			if(Min == list[i].getpayment()) {
+				System.out.println("Nguoi co luong thap nhat la:" +Min);
+				list[i].output();
+			}
+		}
+	}
+	
+}
+public class Baitap3 {
+	public static void main(String[] args) throws IOException {
+		data list  = new data();
+		System.out.println("Nhap du lieu");
+		data.input();
+		System.out.println();
+		data.output();
+		System.out.println("Tang dan:");
+		data.tang();
+		System.out.println("Giam dan:");
+		data.giam();
+		System.out.println();
+		data.Max();
+		System.out.println();
+		data.Min();
+	}
+
+}

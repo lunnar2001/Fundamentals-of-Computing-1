@@ -1,0 +1,15 @@
+INDEX VERSION 1.131+D:\Subject\Fundamentals of Computing 1\.metadata\.plugins\org.eclipse.jdt.core
+761985730.index
+102407068.index
+263517840.index
+2805118470.index
+575299759.index
+4088832729.index
+1071600940.index
+2668874278.index
+4288758527.index
+4007902110.index
+877038676.index
+2011884068.index
+1797998490.index
+934820554.index

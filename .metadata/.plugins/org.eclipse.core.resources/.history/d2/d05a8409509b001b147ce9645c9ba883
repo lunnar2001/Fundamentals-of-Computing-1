@@ -1,0 +1,107 @@
+package midtest;
+import java.util.*;
+import java.io.*;
+
+abstract class sinhvien{
+	String ID;
+	String name;
+	String nganh;
+	sinhvien(){
+		this.ID = "";
+		this.name = "";
+		this.nganh = "";
+	}
+	abstract float diem();
+	void input() {
+		Scanner ad = new Scanner(System.in);
+		System.out.print("Nhap ID: ");
+		ID = ad.next();
+		System.out.print("Nhap ten: ");
+		ad.nextLine();
+		name = ad.nextLine();
+		System.out.print("Nhap nganh: ");
+		ad.nextLine();
+		nganh = ad.nextLine();
+	}
+	void output() {
+		System.out.println("ID: "+this.ID+" | Ten sinh vien: "+this.name+" | Luong: "+diem());
+	}
+	
+}
+class SinhvienKT extends sinhvien{
+	float toanc;
+	float sale;
+	SinhvienKT(){
+		this.toanc = 0;
+		this.sale = 0;
+	}
+	void input() {
+		super.input();
+		Scanner ad = new Scanner(System.in);
+		System.out.print("Nhap diem toan: ");
+		toanc = ad.nextFloat();
+		System.out.print("Nhap diem sale: ");
+		sale = ad.nextFloat();
+	}
+	float diem() {
+		return (float) (10*(salaryGrading + benefitGrading));
+	}
+}
+class ContractStaff extends sinhvien{
+	float wage;
+	float workday;
+	float excessHoursGrading;
+	ContractStaff(){
+		this.wage = 0;
+		this.workday = 0;
+		this.excessHoursGrading = 0;
+	}
+	void input() {
+		super.input();
+		Scanner ad = new Scanner(System.in);
+		wage = ad.nextFloat();
+		workday = ad.nextFloat();
+		excessHoursGrading = ad.nextFloat();
+	}
+	float diem() {
+		return (float) wage* workday*(1+ excessHoursGrading);
+	}
+	
+}
+class data{
+	sinhvien list[]= new sinhvien[100];
+	char asd,l;
+	int n=0;
+	void input() throws IOException {
+		do {
+			System.out.print("Sinh vien IT/KT (n/s): ");
+			asd = (char) System.in.read();
+			if(asd == 'n' || asd == 'N')
+				list[n] = new SinhvienKT();
+			else 
+				list[n] = new ContractStaff();
+			System.in.skip(asd);
+			list[n++].input();
+			System.out.print("Tiep tuc? (y/n): ");
+			l = (char) System.in.read();
+			System.in.skip(l);
+			if(l == 'n' || l == 'N' || n == 100)
+				break;
+		}while(true);
+	}
+	void output() {
+		for(int i=0;i<n;i++)
+			list[i].output();
+	}
+}
+
+
+public class demo {
+
+	public static void main(String[] args) throws IOException {
+		data hs = new data();
+		hs.input();
+		hs.output();
+	}
+
+}

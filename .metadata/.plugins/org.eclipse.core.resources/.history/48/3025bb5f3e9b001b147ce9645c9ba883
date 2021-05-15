@@ -1,0 +1,38 @@
+package dacn;
+
+import java.util.Scanner;
+
+abstract class Employee{
+	String ID;
+	String name;
+	String nganh;
+	float salary;
+	Employee(){
+		this.ID = "";
+		this.name = "";
+		this.ngang =  "";
+		this.salary = 0;
+	}
+	abstract float caculateSalary();
+	void input() {
+		Scanner ad = new Scanner(System.in);
+		System.out.print("Nhap ID: ");
+		ID = ad.next();
+		System.out.print("Nhap ten: ");
+		ad.nextLine();
+		name = ad.nextLine();
+		salary = caculateSalary();
+	}
+	void output() {
+		System.out.println("ID: "+this.ID+" | Ten hoc sinh: "+this.name+" | diem: "+salary);
+	}
+	
+}
+
+public class demo {
+
+	public static void main(String[] args) {
+
+	}
+
+}

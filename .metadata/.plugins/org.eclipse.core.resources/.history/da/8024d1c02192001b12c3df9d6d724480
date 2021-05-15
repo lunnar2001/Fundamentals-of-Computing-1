@@ -1,0 +1,51 @@
+package midtest;
+import java.util.*;
+import java.io.*;
+
+abstract class Employee{
+	String ID;
+	String name;
+	float salary;
+	Employee(){
+		this.ID = "";
+		this.name = "";
+		this.salary = 0;
+	}
+	abstract float caculateSalary();
+	void input() {
+		Scanner ad = new Scanner(System.in);
+		ID = ad.nextLine();
+		ad.nextLine();
+		name = ad.nextLine();
+		ad.nextLine();
+	}
+	void output() {
+		System.out.println("ID: "+ID+" | Ten nhan vien: "+name+" | Luong: "+salary);
+	}
+	
+}
+class RegularEmployee extends Employee{
+	float salaryGrading;
+	float benefitGrading;
+	RegularEmployee(){
+		this.salaryGrading = 0;
+		this.benefitGrading = 0;
+	}
+	
+	float caculateSalary() {
+		return (float) (1000000*(1.0*salaryGrading*benefitGrading));
+	}
+	void input() {
+		super.input(ID, name, salaryGrading);
+		
+	}
+}
+
+public class index {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,44 @@
+package dacn;
+
+import java.util.Scanner;
+
+abstract class sinhvien{
+	String ID;
+	String name;
+	String nganh;
+	float diem;
+	sinhvien(){
+		this.ID = "";
+		this.name = "";
+		this.nganh =  "";
+	}
+	sinhvien(String ID, String name, String nganh){
+		this.ID = ID;
+		this.name = name;
+		this.nganh =  nganh;
+	}
+	abstract float diem();
+	void input() {
+		Scanner ad = new Scanner(System.in);
+		System.out.print("Nhap ID: ");
+		ID = ad.next();
+		System.out.print("Nhap ten: ");
+		ad.nextLine();
+		name = ad.nextLine();
+		System.out.print("Nhap nganh: ");
+		ad.nextLine();
+		nganh = ad.nextLine();
+	}
+	void output() {
+		System.out.println("ID: "+this.ID+" | Ten hoc sinh: "+this.name+" | diem: "+diem());
+	}
+	
+}
+
+public class demo {
+
+	public static void main(String[] args) {
+
+	}
+
+}
